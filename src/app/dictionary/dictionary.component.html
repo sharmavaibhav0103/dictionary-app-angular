@@ -1,0 +1,48 @@
+      <div class="dictionary-main">
+        <h1 class="header-text">Dictionary</h1>
+        <form>
+          <input
+            type="text"
+            class="typo form-field"
+            autoComplete="off"
+            name="word-search"
+            #word
+            (keyup.enter)="addToDoItem(word.value);  word.value = ''"
+          />
+          <input type="submit" 
+                  value="Find" 
+                  class="typo submit-btn" 
+                />
+          </form>
+        
+        <div class="loader">
+          <ng-template [ngIf]="loader > 0">
+            <img src="https://i.postimg.cc/9Fm7KZ2h/Cube-1s-200px.gif" alt="Loader" class="loader">
+          </ng-template>
+        </div>
+
+
+      <ng-template [ngIf] = "response.definitions.length > 0">
+          <div class="response-box">
+            <p class="pronunciation res-text">
+            <span class="title">Pronunciation:</span>
+            <br />
+              {{ response.pronunciation }}
+            </p>
+            <p class="definition res-text">
+              <span class="title">Definition:</span>
+              <br />
+                {{ response.definitions[0].definition }}
+            </p>
+            <p class="example res-text">
+              <span class="title">Example:</span>
+              <br />
+                {{ response.definitions[0].example }}
+            </p>
+        </div>
+      </ng-template>
+
+      <ng-template [ngIf] = "response.status === 404">
+        <h1>Null</h1>
+      </ng-template>
+    </div>
